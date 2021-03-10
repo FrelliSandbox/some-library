@@ -32,7 +32,4 @@ public class SomeUtility {
         return responses[r.nextInt(responses.length)];
     }
 
-    public boolean someNewMethod() {
-        return false;
-    }
 }
