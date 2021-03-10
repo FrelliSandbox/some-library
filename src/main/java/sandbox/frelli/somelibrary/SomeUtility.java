@@ -31,4 +31,8 @@ public class SomeUtility {
     public String magicEightBall() {
         return responses[r.nextInt(responses.length)];
     }
+
+    public boolean someNewMethod() {
+        return false;
+    }
 }
