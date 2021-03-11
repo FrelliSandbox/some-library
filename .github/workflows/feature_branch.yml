@@ -1,6 +1,6 @@
 name: Versioning
 
-on: pull_request
+on: [ push, pull_request ]
 
 jobs:
   version:
@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: Set Version
         run: |
-          echo "project_version=${GITHUB_HEAD_REF}-SNAPSHOT" >> $GITHUB_ENV
+          echo "project_version=${GITHUB_REF#refs/heads/}-SNAPSHOT" >> $GITHUB_ENV
       - name: echo project_version
         run: |
           echo "The project_version environment variable is set to: [${{ env.project_version }}]"
