@@ -1,6 +1,6 @@
 name: Versioning
 
-on: [ push, pull_request ]
+on: [ push ]
 
 jobs:
   version:
@@ -9,6 +9,8 @@ jobs:
     steps:
       - name: Set Version
         run: |
+          echo "GITHUB_REF=${GITHUB_REF}"
+          echo "GITHUB_REF#refs/heads/=${GITHUB_REF#refs/heads/}"
           echo "project_version=${GITHUB_REF#refs/heads/}-SNAPSHOT" >> $GITHUB_ENV
       - name: echo project_version
         run: |
