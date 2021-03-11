@@ -1,20 +1,15 @@
-name: Versioning
+name: Feature Branch CI Pipeline
 
 on: [ push ]
 
 jobs:
   version:
-    name: Determine Version
+    name: Feature Branch CI Pipeline
     runs-on: ubuntu-latest
     steps:
       - name: Set Version
         run: |
-          echo "GITHUB_REF=${GITHUB_REF}"
-          echo "GITHUB_REF#refs/heads/=${GITHUB_REF#refs/heads/}"
           echo "project_version=${GITHUB_REF#refs/heads/}-SNAPSHOT" >> $GITHUB_ENV
-      - name: echo project_version
-        run: |
-          echo "The project_version environment variable is set to: [${{ env.project_version }}]"
       - name: Checkout
         uses: actions/checkout@v1
       - name: Set up JDK 11
