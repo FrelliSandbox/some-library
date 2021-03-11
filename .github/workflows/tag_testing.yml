@@ -19,7 +19,7 @@ jobs:
         id: bump_version
         uses: FrelliSandbox/increment-semantic-version@1.0.2
         with:
-          current-version: ${{ env.latest_tag }}
+          current-version: $(${{ env.latest_tag }} | tr -d v)
           version-fragment: 'feature'
 
       - name: Print Things
