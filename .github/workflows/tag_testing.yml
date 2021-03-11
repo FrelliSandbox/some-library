@@ -12,7 +12,8 @@ jobs:
 
       - name: Find Latest Tag
         run: |
-          echo "latest_tag=${git describe --tags --abbrev=0}" >> $GITHUB_ENV
+          echo "$(git describe --tags --abbrev=0)"
+          echo "latest_tag=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
       - name: Print Things
         run: |
