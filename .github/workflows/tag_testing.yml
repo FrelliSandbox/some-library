@@ -1,0 +1,21 @@
+name: Main Branch CI Pipeline
+
+on: push
+
+jobs:
+  main:
+    name: Tag Testing
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Find Latest Tag
+        run: |
+          echo "latest_tag=${git describe --tags --abbrev=0}" >> $GITHUB_ENV
+
+      - name: Print Things
+        run: |
+          echo "env.latest_tag=${{ env.latest_tag }}"
+
+
