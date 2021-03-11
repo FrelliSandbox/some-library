@@ -15,8 +15,16 @@ jobs:
           echo "$(git describe --tags --abbrev=0)"
           echo "latest_tag=$(git describe --tags --abbrev=0)" >> $GITHUB_ENV
 
+      - name: Bump Release Version
+        id: bump_version
+        uses: FrelliSandbox/increment-semantic-version@1.0.2
+        with:
+          current-version: ${{ env.latest_tag }}
+          version-fragment: 'feature'
+
       - name: Print Things
         run: |
           echo "env.latest_tag=${{ env.latest_tag }}"
+          echo "steps.bump_version.outputs.next-version=${{ steps.bump_version.outputs.next-version }}"
 
 
