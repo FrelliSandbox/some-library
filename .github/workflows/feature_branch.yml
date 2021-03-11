@@ -1,14 +1,18 @@
-name: Library CI
+name: Versioning
 
-on:
-  push:
-    branches: [ main ]
+on: pull_request
 
 jobs:
-  main:
-    name: 'Library CI'
+  version:
+    name: Determine Version
     runs-on: ubuntu-latest
     steps:
+      - name: Set Version
+        run: |
+          echo "project_version=${GITHUB_HEAD_REF}-SNAPSHOT" >> $GITHUB_ENV
+      - name: echo project_version
+        run: |
+          echo "The project_version environment variable is set to: [${{ env.project_version }}]"
       - name: Checkout
         uses: actions/checkout@v1
       - name: Set up JDK 11
@@ -20,7 +24,6 @@ jobs:
       - name: Verify
         run: mvn -B clean verify
       - name: Publish Main Artifacts
-        run: mvn -B deploy -DskipTests
+        run: mvn -B deploy -Drevision=${{ env.project_version }} -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
