@@ -42,8 +42,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - uses: actions-ecosystem/action-push-tag@v1
-        if: ${{ steps.bump-semver.outputs.new_version != null }}
+      - name: Tag & Release
+        uses: softprops/action-gh-release@v1
         with:
-          tag: ${{ steps.bump-semver.outputs.new_version }}
+          tag_name: ${{ steps.bump-semver.outputs.new_version }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
