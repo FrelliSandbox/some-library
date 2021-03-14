@@ -38,14 +38,14 @@ jobs:
           level: patch
 
       - name: Publish Main Artifacts
-        run: mvn -B deploy -Drevision=${{ steps.bump-semver.outputs.new_version }} -DskipTests
+        run: mvn -B deploy -Drevision=$(echo ${{ steps.bump-semver.outputs.new_version }} | cut -c 2-) -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Tag & Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v${{ steps.bump-semver.outputs.new_version }}
+          tag_name: ${{ steps.bump-semver.outputs.new_version }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
