@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Set Version
         run: |
-          echo "project_version=${GITHUB_REF#refs/heads/}-SNAPSHOT" >> $GITHUB_ENV
+          echo "project_version=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
 
       - name: Checkout
         uses: actions/checkout@v1
@@ -36,6 +36,6 @@ jobs:
         run: mvn -B verify
 
       - name: Publish Snapshot Artifacts
-        run: mvn -B deploy -Drevision=${{ env.project_version }} -DskipTests
+        run: mvn -B deploy -Drevision=${{ env.project_version }}-SNAPSHOT -DskipTests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
